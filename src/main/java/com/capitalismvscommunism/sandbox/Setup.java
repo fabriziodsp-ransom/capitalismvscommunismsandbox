@@ -49,6 +49,8 @@ public class Setup {
         
         printAvailableResources(aCapitalistIdeology);
         printAvailableResources(aCommunistIdeology);
+        aCapitalistIdeology.workTypeSelection(aCapitalistIdeology);
+        aCommunistIdeology.workTypeSelection(aCommunistIdeology);
     }
     public static void printAvailableResources(Ideology ideology) {
         int[] availableResources = ideology.getAvailableResources();
