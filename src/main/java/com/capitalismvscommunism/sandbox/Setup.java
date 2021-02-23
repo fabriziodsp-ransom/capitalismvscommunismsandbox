@@ -42,7 +42,7 @@ public class Setup {
         String COMMUNIST_NAME = in.nextLine();
         System.out.println("The communist side will be named: " + COMMUNIST_NAME);
         Thread.sleep(2000);
-        System.out.println("Let's start then!" + "\n");
+        System.out.println("Let's staPISrt then!" + "\n");
         
         aCapitalistIdeology = new Ideology(CAPITALIST_NAME);
         aCommunistIdeology = new Ideology(COMMUNIST_NAME);
