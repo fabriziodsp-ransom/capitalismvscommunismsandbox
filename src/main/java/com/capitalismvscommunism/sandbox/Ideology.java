@@ -23,6 +23,9 @@ package com.capitalismvscommunism.sandbox;
  */
 public class Ideology {
     protected final String NAME;
+    
+    protected int id;
+    private static int ideologiesCreated = 0;
     private int stone;
     private int wood;
     private int metal;
@@ -33,10 +36,11 @@ public class Ideology {
     private String[][] resourcesNamesAndQuantities = new String[5][2];
 
     Ideology(String name) {
+        
         this.NAME = name;
+        id = ++ideologiesCreated; 
         
         int i = 0;
-        
         for (Resources res : LIST_OF_RESOURCES) {
             this.resourcesNamesAndQuantities[i][0] = res.toString();
             this.resourcesNamesAndQuantities[i][1] = res.getResourceValue();
@@ -55,7 +59,12 @@ public class Ideology {
     protected void setResource(String name, int quantity) {
         name += quantity; 
     }
-    protected void workTypeSelection() {
-        //Filter by ideology and make them work according to their ideas.
+    protected void workTypeSelection(Ideology ideology) {
+        if(ideology.id == 1) {
+            System.out.println("IT'S A CAPITALIST");
+        } else if(ideology.id == 2) {
+            System.out.println("It's a fucking communist patasucia.");
+        }
     }
+    
 }
