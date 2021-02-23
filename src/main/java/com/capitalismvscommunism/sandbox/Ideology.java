@@ -66,5 +66,4 @@ public class Ideology {
             System.out.println("IT'S A COMMUNIST");
         }
     }
-    
 }
