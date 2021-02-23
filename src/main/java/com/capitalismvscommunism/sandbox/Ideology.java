@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * TEST TEST TEST TEST TEST
  */
 package com.capitalismvscommunism.sandbox;
 
@@ -64,7 +63,7 @@ public class Ideology {
         if(ideology.id == 1) {
             System.out.println("IT'S A CAPITALIST");
         } else if(ideology.id == 2) {
-            System.out.println("It's a fucking communist patasucia.");
+            System.out.println("IT'S A COMMUNIST");
         }
     }
     
