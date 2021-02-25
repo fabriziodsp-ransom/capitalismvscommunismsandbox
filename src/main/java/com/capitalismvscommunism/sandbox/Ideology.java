@@ -57,7 +57,15 @@ public class Ideology {
         return new int[] {this.stone, this.wood, this.metal, this.sandbox$, this.gold};
     }
     protected void setResource(String name, int quantity) {
-        name += quantity; 
+        switch(name) {
+            case "stone" -> this.stone += quantity;
+            case "wood" -> this.wood += quantity;
+            case "metal" -> this.metal += quantity;
+            case "sandbox$" -> this.sandbox$ += quantity;
+            case "gold" -> this.gold += quantity;
+            default -> {
+            }
+        }
     }
     protected void workTypeSelection(Ideology ideology) {
         if(ideology.id == 1) {

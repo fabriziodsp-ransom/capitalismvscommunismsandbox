@@ -25,6 +25,7 @@ import java.util.Scanner;
 public class Setup {
     public static Ideology aCapitalistIdeology;
     public static Ideology aCommunistIdeology;
+    public static int dayNo = 0;
     
     public static void main(String[] args) throws InterruptedException {
         Scanner in = new Scanner(System.in);
@@ -32,7 +33,7 @@ public class Setup {
         System.out.println("Hello, this is a sandbox designed to check which "
                 + "ideology is the best for resource handling and for the economy");
         
-        Thread.sleep(3000);
+        Thread.sleep(1500);
       
         System.out.println("Let's start with the right-capitalist wing."
                 + " Choose a name for those.");
@@ -41,16 +42,22 @@ public class Setup {
         System.out.println("Now another one for the communist one: ");
         String COMMUNIST_NAME = in.nextLine();
         System.out.println("The communist side will be named: " + COMMUNIST_NAME);
-        Thread.sleep(2000);
+        Thread.sleep(1500);
         System.out.println("Let's start then!\n");
         
         aCapitalistIdeology = new Ideology(CAPITALIST_NAME);
         aCommunistIdeology = new Ideology(COMMUNIST_NAME);
-        
+        //Printing av. Res. for the beggining of the sim.
         printAvailableResources(aCapitalistIdeology);
         printAvailableResources(aCommunistIdeology);
+        //Set ideologies
         aCapitalistIdeology.workTypeSelection(aCapitalistIdeology);
         aCommunistIdeology.workTypeSelection(aCommunistIdeology);
+        // Continue from here.
+        aCapitalistIdeology.setResource("stone", 10);
+        aCapitalistIdeology.getAvailableResources();
+        
+        printAvailableResources(aCapitalistIdeology);
     }
     public static void printAvailableResources(Ideology ideology) {
         int[] availableResources = ideology.getAvailableResources();
