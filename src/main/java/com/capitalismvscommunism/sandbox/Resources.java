@@ -26,8 +26,10 @@ public enum Resources {
     WOOD ("400"),
     METAL ("400"),
     SANDBOX$ ("400"),
-    GOLD ("400");
-
+    GOLD ("400"),
+    PRIVATE_ENTERPRISES ("4"),
+    PUBLIC_ENTERPISES ("2");
+    
     private String resourceQuantity;
     
     private Resources(String quantity) {
