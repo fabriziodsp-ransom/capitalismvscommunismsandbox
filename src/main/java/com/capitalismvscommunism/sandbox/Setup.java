@@ -25,6 +25,7 @@ import java.util.Scanner;
 public class Setup {
     public static Ideology aCapitalistIdeology;
     public static Ideology aCommunistIdeology;
+    public static int daysToSim = 0;
     public static int dayNo = 0;
     
     public static void main(String[] args) throws InterruptedException {
@@ -38,49 +39,60 @@ public class Setup {
         System.out.println("Let's start with the right-capitalist wing."
                 + " Choose a name for those.");
         String CAPITALIST_NAME = in.nextLine();
+        
         System.out.println("So you chose: " + CAPITALIST_NAME + " for the capitalist side.");
         System.out.println("Now another one for the communist one: ");
         String COMMUNIST_NAME = in.nextLine();
+        
         System.out.println("The communist side will be named: " + COMMUNIST_NAME);
+        System.out.println("For how much days you want to simulate?: [1/2/3/...]");
+        daysToSim = in.nextInt();
+        
         Thread.sleep(1500);
         System.out.println("Let's start then!\n");
         
+        //initializing
         aCapitalistIdeology = new Ideology(CAPITALIST_NAME);
         aCommunistIdeology = new Ideology(COMMUNIST_NAME);
-        //Printing av. Res. for the beggining of the sim.
-        printAvailableResources(aCapitalistIdeology);
-        printAvailableResources(aCommunistIdeology);
-        //Set ideologies
-        aCapitalistIdeology.workTypeSelection(aCapitalistIdeology);
-        aCommunistIdeology.workTypeSelection(aCommunistIdeology);
-        // Continue from here.
-        aCapitalistIdeology.setResource("stone", 10);
-        aCapitalistIdeology.getAvailableResources();
         
-        printAvailableResources(aCapitalistIdeology);
+        
+        startNewDay();
+        
     }
     public static void printAvailableResources(Ideology ideology) {
         int[] availableResources = ideology.getAvailableResources();
         
         System.out.println("\n" + ideology.NAME + ": ");
+        
         for(int i = 0; i < availableResources.length; i++) {
             switch (i) {
-                case 0:
-                    System.out.println("Stone: " + availableResources[i]);
-                    break;
-                case 1:
-                    System.out.println("Wood: " + availableResources[i]);
-                    break;
-                case 2:
-                    System.out.println("Metal: " + availableResources[i]);
-                    break;
-                case 3:
-                    System.out.println("SANDBOX$: " + availableResources[i]);
-                    break;
-                case 4:
-                    System.out.println("Gold: " + availableResources[i]);
-                default:
-                    break;
+                case 0 -> System.out.println("Stone: " + availableResources[i]);
+                case 1 -> System.out.println("Wood: " + availableResources[i]);
+                case 2 -> System.out.println("Metal: " + availableResources[i]);
+                case 3 -> System.out.println("SANDBOX$: " + availableResources[i]);
+                case 4 -> System.out.println("Gold: " + availableResources[i]);
+                case 5 -> System.out.println("Private Enterprises: " + availableResources[i]);
+                case 6 -> System.out.println("Public Enterprises: " + availableResources[i]);
+                default -> {
+                }
+            }
+        }
+    }
+    public static void startNewDay() {
+
+        for(int i = 0; i <= daysToSim; i++) {
+            
+//Printing av. Res. for the beggining of the sim.
+            printAvailableResources(aCapitalistIdeology);
+            printAvailableResources(aCommunistIdeology);
+            
+//Set ideologies' work mode.
+            aCapitalistIdeology.workTypeSelection(aCapitalistIdeology);
+            aCommunistIdeology.workTypeSelection(aCommunistIdeology);
+            
+            if(i == daysToSim) {
+                System.out.println("Simulation is over.");
+                break;
             }
         }
     }
