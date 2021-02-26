@@ -26,14 +26,17 @@ public class Ideology {
     
     protected int id;
     private static int ideologiesCreated = 0;
+    
     private int stone;
     private int wood;
     private int metal;
     private int sandbox$;
     private int gold;
+    private int privateEnterprises;
+    private int publicEnterprises;
     
     private final Resources[] LIST_OF_RESOURCES = Resources.values();
-    private String[][] resourcesNamesAndQuantities = new String[5][2];
+    private final String[][] resourcesNamesAndQuantities = new String[7][2];
 
     Ideology(String name) {
         
@@ -51,10 +54,23 @@ public class Ideology {
         this.metal = Integer.parseInt(this.resourcesNamesAndQuantities[2][1]);
         this.sandbox$ = Integer.parseInt(this.resourcesNamesAndQuantities[3][1]);
         this.gold = Integer.parseInt(this.resourcesNamesAndQuantities[4][1]);
-    }
+        this.privateEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[5][1]);
+        this.publicEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[6][1]);
+}
     
     protected int[] getAvailableResources() {
-        return new int[] {this.stone, this.wood, this.metal, this.sandbox$, this.gold};
+        return new int[] {this.stone, this.wood, this.metal, this.sandbox$, 
+            this.gold, this.privateEnterprises, this.publicEnterprises};
+    }
+    protected float getAverageResources() {
+        int[] resources = getAvailableResources();
+        int sumOfResourcesQuantity = 0;
+        for(int quantity : resources) {
+            sumOfResourcesQuantity += quantity;
+        }
+        float average = sumOfResourcesQuantity / resources.length;
+        
+        return average;
     }
     protected void setResource(String name, int quantity) {
         switch(name) {
@@ -63,15 +79,37 @@ public class Ideology {
             case "metal" -> this.metal += quantity;
             case "sandbox$" -> this.sandbox$ += quantity;
             case "gold" -> this.gold += quantity;
+            case "privateEnt" -> this.privateEnterprises += quantity;
+            case "publicEnt" -> this.publicEnterprises += quantity;
             default -> {
             }
         }
     }
     protected void workTypeSelection(Ideology ideology) {
         if(ideology.id == 1) {
-            System.out.println("IT'S A CAPITALIST");
+            ideology.capitalistWorkMode();
         } else if(ideology.id == 2) {
-            System.out.println("IT'S A COMMUNIST");
+            ideology.communistWorkMode();
         }
+    }
+    private void capitalistWorkMode() {
+        int growthBasedOnProductivity = (int) (Math.random() * getAverageResources());
+        this.setResource("stone", growthBasedOnProductivity);
+        this.setResource("wood", growthBasedOnProductivity);
+        this.setResource("metal", growthBasedOnProductivity);
+        this.setResource("sandbox$", growthBasedOnProductivity);
+        this.setResource("gold", growthBasedOnProductivity);
+        this.setResource("privateEnt", growthBasedOnProductivity);
+        this.setResource("publicEnt", growthBasedOnProductivity * 0);
+    }
+    private void communistWorkMode() {
+        int growthBasedOnProductivity = (int) (Math.random() * getAverageResources() / 20);
+        this.setResource("stone", growthBasedOnProductivity);
+        this.setResource("wood", growthBasedOnProductivity);
+        this.setResource("metal", growthBasedOnProductivity);
+        this.setResource("sandbox$", growthBasedOnProductivity);
+        this.setResource("gold", growthBasedOnProductivity);
+        this.setResource("publicEnt", growthBasedOnProductivity);
+        this.setResource("privateEnt", growthBasedOnProductivity * 0);
     }
 }
