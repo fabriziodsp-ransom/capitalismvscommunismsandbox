@@ -38,11 +38,17 @@ public class Setup {
       
         System.out.println("Let's start with the right-capitalist wing."
                 + " Choose a name for those.");
+        
         String CAPITALIST_NAME = in.nextLine();
+        
+        if(!CAPITALIST_NAME.equals("")) CAPITALIST_NAME = CAPITALIST_NAME; else CAPITALIST_NAME = "Capitalism";
         
         System.out.println("So you chose: " + CAPITALIST_NAME + " for the capitalist side.");
         System.out.println("Now another one for the communist one: ");
+        
         String COMMUNIST_NAME = in.nextLine();
+        
+        if(!COMMUNIST_NAME.equals("")) COMMUNIST_NAME = COMMUNIST_NAME; else COMMUNIST_NAME = "Communism";
         
         System.out.println("The communist side will be named: " + COMMUNIST_NAME);
         System.out.println("For how much days you want to simulate?: [1/2/3/...]");
