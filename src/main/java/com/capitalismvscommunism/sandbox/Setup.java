@@ -21,10 +21,11 @@ import java.util.Scanner;
  *
  * @author Fabrizio
  * @date 2021-02-22
+ * @version 2.0
  */
 public class Setup {
-    public static Ideology aCapitalistIdeology;
-    public static Ideology aCommunistIdeology;
+    public static IdeologyMethods aCapitalistIdeology;
+    public static IdeologyMethods aCommunistIdeology;
     public static int daysToSim = 0;
     public static int dayNo = 0;
     
@@ -41,14 +42,14 @@ public class Setup {
         
         String CAPITALIST_NAME = in.nextLine();
         
-        if(!CAPITALIST_NAME.equals("")) CAPITALIST_NAME = CAPITALIST_NAME; else CAPITALIST_NAME = "Capitalism";
+        if(!CAPITALIST_NAME.equals("")); else CAPITALIST_NAME = "Capitalism";
         
         System.out.println("So you chose: " + CAPITALIST_NAME + " for the capitalist side.");
         System.out.println("Now another one for the communist one: ");
         
         String COMMUNIST_NAME = in.nextLine();
         
-        if(!COMMUNIST_NAME.equals("")) COMMUNIST_NAME = COMMUNIST_NAME; else COMMUNIST_NAME = "Communism";
+        if(!COMMUNIST_NAME.equals("")); else COMMUNIST_NAME = "Communism";
         
         System.out.println("The communist side will be named: " + COMMUNIST_NAME);
         System.out.println("For how much days you want to simulate?: [1/2/3/...]");
@@ -58,17 +59,17 @@ public class Setup {
         System.out.println("Let's start then!\n");
         
         //initializing
-        aCapitalistIdeology = new Ideology(CAPITALIST_NAME);
-        aCommunistIdeology = new Ideology(COMMUNIST_NAME);
         
-        
+        aCapitalistIdeology = Ideology.createIdeology(CAPITALIST_NAME, "capitalism");
+        aCommunistIdeology =  Ideology.createIdeology(COMMUNIST_NAME, "communism");
+    
         startNewDay();
         
     }
-    public static void printAvailableResources(Ideology ideology) {
-        int[] availableResources = ideology.getAvailableResources();
+    public static void printAvailableResources(IdeologyMethods ideology) {
+        float[] availableResources = ideology.getAvailableResources();
         
-        System.out.println("\n" + ideology.NAME + ": ");
+        System.out.println("\n" + ideology.getName() + ": ");
         
         for(int i = 0; i < availableResources.length; i++) {
             switch (i) {
@@ -87,15 +88,14 @@ public class Setup {
     public static void startNewDay() {
 
         for(int i = 0; i <= daysToSim; i++) {
-            
+
 //Printing av. Res. for the beggining of the sim.
             printAvailableResources(aCapitalistIdeology);
             printAvailableResources(aCommunistIdeology);
-            
-//Set ideologies' work mode.
-            aCapitalistIdeology.workTypeSelection(aCapitalistIdeology);
-            aCommunistIdeology.workTypeSelection(aCommunistIdeology);
-            
+
+//Selecing workmode.
+            aCapitalistIdeology.capitalistWorkMode();
+            aCommunistIdeology.communistWorkMode();
             if(i == daysToSim) {
                 System.out.println("Simulation is over.");
                 break;
