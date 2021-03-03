@@ -1,0 +1,22 @@
+-classpath
+'C:/Users/usuario/.m2/repository/org/json/json/20201115/json-20201115.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'C:/Users/usuario/Documents/NetBeansProjects/capitalismvscommunismsandbox/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/usuario/Documents/NetBeansProjects/capitalismvscommunismsandbox/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'CapitalismVsCommunismSandbox 1.0 API'
+-use
+-version
+-windowtitle
+'CapitalismVsCommunismSandbox 1.0 API'
