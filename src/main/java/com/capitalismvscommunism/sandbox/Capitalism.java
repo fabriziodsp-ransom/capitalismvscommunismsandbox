@@ -26,7 +26,7 @@ package com.capitalismvscommunism.sandbox;
 public class Capitalism implements IdeologyMethods {
     private final String NAME;
     
-    protected final int id;
+    private final int id;
     public static int ideologiesCreated = 0;
     
     private float stone;
@@ -58,6 +58,10 @@ public class Capitalism implements IdeologyMethods {
         this.gold = Integer.parseInt(this.resourcesNamesAndQuantities[4][1]);
         this.privateEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[5][1]);
         this.publicEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[6][1]);
+    }
+    @Override
+    public int getId() {
+        return this.id;
     }
     @Override
     public String getName() {
