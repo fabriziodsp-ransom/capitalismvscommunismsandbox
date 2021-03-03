@@ -19,15 +19,16 @@ package com.capitalismvscommunism.sandbox;
 /**
  *
  * @author Fabrizio
+ * @date 2021-02-22
  * @version 2.0
  */
-public class Ideology {
-    public static IdeologyMethods createIdeology(String name, String type) {
-        if(type.equalsIgnoreCase("capitalism")) {
-            return new Capitalism(name);
-        } else if (type.equalsIgnoreCase("communism")) {
-            return new Communism(name);
-        }
-        return null;
-    }
+
+public interface IdeologyMethods {
+    public float[] getAvailableResources();
+    public float getAverageResources();
+    public void setResource(String name, double quantity);
+    public String getName();
+    public void capitalistWorkMode();
+    public void communistWorkMode();
+    public void publicEnterpriseCreation();
 }
