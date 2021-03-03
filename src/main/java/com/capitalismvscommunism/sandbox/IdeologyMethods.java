@@ -31,4 +31,5 @@ public interface IdeologyMethods {
     public void capitalistWorkMode();
     public void communistWorkMode();
     public void publicEnterpriseCreation();
+    public int getId();
 }
