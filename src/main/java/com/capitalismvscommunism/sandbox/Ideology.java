@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Fabrizio
+ * Copyright (C) 2021 Fabrizio De Stena Primerano
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,24 +16,35 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package com.capitalismvscommunism.sandbox;
+import org.json.JSONObject;
 
 /**
  *
- * @author Fabrizio
+ * @author Fabrizio De Stena Primerano
+ * @format dd/mm/yyyy
+ * @date 06/03/2021
+ * @version refactor-more-logic
+ * 
  */
-public class Ideology {
-    protected final String NAME;
+public class Ideology implements IdeologyMethods {
+    private final String NAME;
     
-    protected int id;
-    private static int ideologiesCreated = 0;
-    private int stone;
-    private int wood;
-    private int metal;
-    private int sandbox$;
-    private int gold;
+    private final int id;
+    public static int ideologiesCreated = 0;
+    
+    private float stone;
+    private float wood;
+    private float metal;
+    private float sandbox$;
+    private float gold;
+    private float privateEnterprises;
+    private float publicEnterprises;
+    private int publicEmployees;
+    private int privateEmployees;
+    private float joyLevel;
     
     private final Resources[] LIST_OF_RESOURCES = Resources.values();
-    private String[][] resourcesNamesAndQuantities = new String[5][2];
+    private final String[][] resourcesNamesAndQuantities = new String[7][2];
 
     Ideology(String name) {
         
@@ -51,19 +62,100 @@ public class Ideology {
         this.metal = Integer.parseInt(this.resourcesNamesAndQuantities[2][1]);
         this.sandbox$ = Integer.parseInt(this.resourcesNamesAndQuantities[3][1]);
         this.gold = Integer.parseInt(this.resourcesNamesAndQuantities[4][1]);
+        this.privateEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[5][1]);
+        this.publicEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[6][1]);
+        this.publicEmployees = 500;
+        this.privateEmployees = 500;
+        this.joyLevel = 100;
+    }
+    @Override
+    public int getId() {
+        return this.id;
+    }
+    @Override
+    public String getName() {
+        return this.NAME;
+    }
+    @Override
+    public JSONObject getAvailableResources() {
+        
+        JSONObject availableResourcesJson = new JSONObject()
+                .put("stone", this.stone)
+                .put("wood", this.wood)
+                .put("metal", this.metal)
+                .put("sandbox$", this.sandbox$)
+                .put("gold", this.gold)
+                .put("privateEnterprises", this.privateEnterprises)
+                .put("publicEnterprises", this.publicEnterprises)
+                .put("publicEmployees", this.publicEmployees)
+                .put("privateEmployees", this.privateEmployees)
+                .put("joylevel", this.joyLevel);
+        
+        return availableResourcesJson;
+        
     }
     
-    protected int[] getAvailableResources() {
-        return new int[] {this.stone, this.wood, this.metal, this.sandbox$, this.gold};
+    @Override
+    public float getAverageResources() {   
+        JSONObject resources = getAvailableResources();
+        
+        float sumOfResourcesQuantity = 0;
+        
+        for(var val : resources.names()) {
+            sumOfResourcesQuantity += resources.getFloat(val.toString());
+        }
+        
+        
+        float average = sumOfResourcesQuantity / resources.length();
+        
+        return average;
     }
-    protected void setResource(String name, int quantity) {
-        name += quantity; 
-    }
-    protected void workTypeSelection(Ideology ideology) {
-        if(ideology.id == 1) {
-            System.out.println("IT'S A CAPITALIST");
-        } else if(ideology.id == 2) {
-            System.out.println("IT'S A COMMUNIST");
+    
+    @Override
+    public void setResource(String name, double quantity) {
+        switch(name) {
+            case "stone" -> this.stone += quantity;
+            case "wood" -> this.wood += quantity;
+            case "metal" -> this.metal += quantity;
+            case "sandbox$" -> this.sandbox$ += quantity;
+            case "gold" -> this.gold += quantity;
+            case "publicEnt" -> this.publicEnterprises += quantity;
+            case "privateEnt" -> this.privateEnterprises += quantity;
+            case "publicEmployees" -> this.publicEmployees += quantity;
+            case "privateEmployees" -> this.privateEmployees += quantity;
+            case "joylevel" -> {
+                float average = (int) (this.joyLevel * quantity / 100);
+                
+                if(average > 100) {
+                    this.joyLevel = 100;
+                } else if (average < 0) {
+                    this.joyLevel = 0;
+                } else {
+                    this.joyLevel = average;
+                }
+            }
+            default -> {
+            }
         }
     }
+    @Override
+    public void communistWorkMode() {/*Implemented in Communism.java*/}
+    
+    @Override
+    public void capitalistWorkMode() {/*Implemented in Capitalism.java*/}
+    
+    @Override
+    public void publicEnterpriseCreation() {
+        // Public enterprises are coasted by the state.
+        // Every public enterprise will cost a fixed price of SBD$ 150. (for this project)
+        int randomPublicEntDemand = (int) (Math.random() * 5);
+        int index = 0;
+        do {
+            this.setResource("sandbox$", -150);
+            this.setResource("publicEnt", 1);
+            index++;
+        } while(index < randomPublicEntDemand);
+    }
+    
+    
 }

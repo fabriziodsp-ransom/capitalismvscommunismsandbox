@@ -16,30 +16,21 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package com.capitalismvscommunism.sandbox;
-
 /**
  *
  * @author Fabrizio De Stena Primerano
  * @format dd/mm/yyyy
  * @date 06/03/2021
- * @version refactor-more-logic
+ * @version 3.0
  * 
  */
-public enum Resources {
-    STONE ("400"),
-    WOOD ("400"),
-    METAL ("400"),
-    SANDBOX$ ("400"),
-    GOLD ("400"),
-    PRIVATE_ENTERPRISES ("4"),
-    PUBLIC_ENTERPISES ("2");
-    
-    private String resourceQuantity;
-    
-    private Resources(String quantity) {
-        this.resourceQuantity = quantity;
-    }
-    public String getResourceValue() {
-        return this.resourceQuantity;
+public class IdeologyMaker {
+    public static IdeologyMethods createIdeology(String name, String type) {
+        if(type.equalsIgnoreCase("capitalism")) {
+            return new Capitalism(name);
+        } else if (type.equalsIgnoreCase("communism")) {
+            return new Communism(name);
+        }
+        return null;
     }
 }

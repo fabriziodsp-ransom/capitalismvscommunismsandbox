@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package com.capitalismvscommunism.sandbox;
-
+import org.json.JSONObject;
 /**
  *
  * @author Fabrizio De Stena Primerano
@@ -25,21 +25,14 @@ package com.capitalismvscommunism.sandbox;
  * @version refactor-more-logic
  * 
  */
-public enum Resources {
-    STONE ("400"),
-    WOOD ("400"),
-    METAL ("400"),
-    SANDBOX$ ("400"),
-    GOLD ("400"),
-    PRIVATE_ENTERPRISES ("4"),
-    PUBLIC_ENTERPISES ("2");
-    
-    private String resourceQuantity;
-    
-    private Resources(String quantity) {
-        this.resourceQuantity = quantity;
-    }
-    public String getResourceValue() {
-        return this.resourceQuantity;
-    }
+
+public interface IdeologyMethods {
+    public JSONObject getAvailableResources();
+    public float getAverageResources();
+    public void setResource(String name, double quantity);
+    public String getName();
+    public void capitalistWorkMode();
+    public void communistWorkMode();
+    public void publicEnterpriseCreation();
+    public int getId();
 }

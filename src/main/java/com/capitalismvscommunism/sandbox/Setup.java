@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Fabrizio
+ * Copyright (C) 2021 Fabrizio De Stena Primerano
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,20 @@
  */
 package com.capitalismvscommunism.sandbox;
 import java.util.Scanner;
+import org.json.JSONObject;
 /**
  *
- * @author Fabrizio
- * @date 2021-02-22
+ * @author Fabrizio De Stena Primerano
+ * @format dd/mm/yyyy
+ * @date 06/03/2021
+ * @version refactor-more-logic
+ * 
  */
 public class Setup {
-    public static Ideology aCapitalistIdeology;
-    public static Ideology aCommunistIdeology;
+    public static IdeologyMethods aCapitalistIdeology;
+    public static IdeologyMethods aCommunistIdeology;
+    public static int daysToSim = 0;
+    public static int dayNo = 0;
     
     public static void main(String[] args) throws InterruptedException {
         Scanner in = new Scanner(System.in);
@@ -32,48 +38,60 @@ public class Setup {
         System.out.println("Hello, this is a sandbox designed to check which "
                 + "ideology is the best for resource handling and for the economy");
         
-        Thread.sleep(3000);
+        Thread.sleep(1500);
       
         System.out.println("Let's start with the right-capitalist wing."
                 + " Choose a name for those.");
+        
         String CAPITALIST_NAME = in.nextLine();
+        
+        if(!CAPITALIST_NAME.equals("")); else CAPITALIST_NAME = "Capitalism";
+        
         System.out.println("So you chose: " + CAPITALIST_NAME + " for the capitalist side.");
         System.out.println("Now another one for the communist one: ");
+        
         String COMMUNIST_NAME = in.nextLine();
+        
+        if(!COMMUNIST_NAME.equals("")); else COMMUNIST_NAME = "Communism";
+        
         System.out.println("The communist side will be named: " + COMMUNIST_NAME);
-        Thread.sleep(2000);
+        System.out.println("For how much days you want to simulate?: [1/2/3/...]");
+        daysToSim = in.nextInt();
+        
+        Thread.sleep(1500);
         System.out.println("Let's start then!\n");
         
-        aCapitalistIdeology = new Ideology(CAPITALIST_NAME);
-        aCommunistIdeology = new Ideology(COMMUNIST_NAME);
+        //initializing
         
-        printAvailableResources(aCapitalistIdeology);
-        printAvailableResources(aCommunistIdeology);
-        aCapitalistIdeology.workTypeSelection(aCapitalistIdeology);
-        aCommunistIdeology.workTypeSelection(aCommunistIdeology);
+        aCapitalistIdeology = IdeologyMaker.createIdeology(CAPITALIST_NAME, "capitalism");
+        aCommunistIdeology =  IdeologyMaker.createIdeology(COMMUNIST_NAME, "communism");
+    
+        startNewDay();
+        
     }
-    public static void printAvailableResources(Ideology ideology) {
-        int[] availableResources = ideology.getAvailableResources();
+    public static void printAvailableResources(IdeologyMethods ideology) {
+        JSONObject availableResources = ideology.getAvailableResources();
         
-        System.out.println("\n" + ideology.NAME + ": ");
-        for(int i = 0; i < availableResources.length; i++) {
-            switch (i) {
-                case 0:
-                    System.out.println("Stone: " + availableResources[i]);
-                    break;
-                case 1:
-                    System.out.println("Wood: " + availableResources[i]);
-                    break;
-                case 2:
-                    System.out.println("Metal: " + availableResources[i]);
-                    break;
-                case 3:
-                    System.out.println("SANDBOX$: " + availableResources[i]);
-                    break;
-                case 4:
-                    System.out.println("Gold: " + availableResources[i]);
-                default:
-                    break;
+        System.out.println("\n" + ideology.getName() + ": ");
+        
+        for (var resource : availableResources.names()) {
+            System.out.println(resource.toString() + ": " + availableResources.getFloat(resource.toString()));
+        }
+    }
+    public static void startNewDay() {
+
+        for(int i = 0; i <= daysToSim; i++) {
+
+//Printing av. Res. for the beggining of the sim.
+            printAvailableResources(aCapitalistIdeology);
+            printAvailableResources(aCommunistIdeology);
+
+//Selecing workmode.
+            aCapitalistIdeology.capitalistWorkMode();
+            aCommunistIdeology.communistWorkMode();
+            if(i == daysToSim) {
+                System.out.println("Simulation is over.");
+                break;
             }
         }
     }
