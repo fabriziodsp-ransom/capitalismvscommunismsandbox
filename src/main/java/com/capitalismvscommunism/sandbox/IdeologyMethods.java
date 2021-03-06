@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Fabrizio
+ * Copyright (C) 2021 Fabrizio De Stena Primerano
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,9 +18,11 @@
 package com.capitalismvscommunism.sandbox;
 /**
  *
- * @author Fabrizio
- * @date 2021-02-22
- * @version 2.0
+ * @author Fabrizio De Stena Primerano
+ * @format dd/mm/yyyy
+ * @date 06/03/2021
+ * @version 3.0
+ * 
  */
 
 public interface IdeologyMethods {

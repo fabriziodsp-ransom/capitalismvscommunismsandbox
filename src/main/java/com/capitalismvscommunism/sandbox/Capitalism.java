@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Fabrizio
+ * Copyright (C) 2021 Fabrizio De Stena Primerano
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,104 +19,19 @@ package com.capitalismvscommunism.sandbox;
 
 /**
  *
- * @author Fabrizio
- * @date 2021-02-22
- * @version 2.0
+ * @author Fabrizio De Stena Primerano
+ * @format dd/mm/yyyy
+ * @date 06/03/2021
+ * @version 3.0
+ * 
  */
-public class Capitalism implements IdeologyMethods {
-    private final String NAME;
-    
-    private final int id;
-    public static int ideologiesCreated = 0;
-    
-    private float stone;
-    private float wood;
-    private float metal;
-    private float sandbox$;
-    private float gold;
-    private float privateEnterprises;
-    private float publicEnterprises;
-    
-    private final Resources[] LIST_OF_RESOURCES = Resources.values();
-    private final String[][] resourcesNamesAndQuantities = new String[7][2];
+public class Capitalism extends Ideology {
 
-    Capitalism(String name) {
-        
-        this.NAME = name;
-        id = ++ideologiesCreated; 
-        
-        int i = 0;
-        for (Resources res : LIST_OF_RESOURCES) {
-            this.resourcesNamesAndQuantities[i][0] = res.toString();
-            this.resourcesNamesAndQuantities[i][1] = res.getResourceValue();
-            i++;
-        }
-        this.stone = Integer.parseInt(this.resourcesNamesAndQuantities[0][1]);
-        this.wood = Integer.parseInt(this.resourcesNamesAndQuantities[1][1]);
-        this.metal = Integer.parseInt(this.resourcesNamesAndQuantities[2][1]);
-        this.sandbox$ = Integer.parseInt(this.resourcesNamesAndQuantities[3][1]);
-        this.gold = Integer.parseInt(this.resourcesNamesAndQuantities[4][1]);
-        this.privateEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[5][1]);
-        this.publicEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[6][1]);
-    }
-    @Override
-    public int getId() {
-        return this.id;
-    }
-    @Override
-    public String getName() {
-        return this.NAME;
-    }
-    @Override
-    public float[] getAvailableResources() {
-        return new float[] {this.stone, this.wood, this.metal, this.sandbox$, 
-            this.gold, this.privateEnterprises, this.publicEnterprises};
-    }
-    @Override
-    public float getAverageResources() {
-        float[] resources = getAvailableResources();
-        int sumOfResourcesQuantity = 0;
-        for(double quantity : resources) {
-            sumOfResourcesQuantity += quantity;
-        }
-        float average = sumOfResourcesQuantity / resources.length;
-        
-        return average;
-    }
-    @Override
-    public void setResource(String name, double quantity) {
-        switch(name) {
-            case "stone" -> this.stone += quantity;
-            case "wood" -> this.wood += quantity;
-            case "metal" -> this.metal += quantity;
-            case "sandbox$" -> this.sandbox$ += quantity;
-            case "gold" -> this.gold += quantity;
-            case "privateEnt" -> this.privateEnterprises += quantity;
-            default -> {
-            }
-        }
+    public Capitalism(String name) {
+        super(name);
     }
     @Override
     public void capitalistWorkMode() {
-        double growthBasedOnProductivity = (double) (Math.random() * getAverageResources());
-        int moneyLeftFromPublicInversions = (int) ((int) this.sandbox$ - (this.sandbox$ * this.publicEnterprises / 100));
-        float moneyFromTaxes = (float) ((float) this.sandbox$ * (this.privateEnterprises * 2 / 100));
-        
-        this.setResource("stone", growthBasedOnProductivity);
-        this.setResource("wood", growthBasedOnProductivity);
-        this.setResource("metal", growthBasedOnProductivity);
-        this.setResource("sandbox$", moneyLeftFromPublicInversions + moneyFromTaxes);
-        this.setResource("gold", growthBasedOnProductivity);
-        this.setResource("privateEnt", (int) growthBasedOnProductivity);
-        this.setResource("publicEnt", (int) growthBasedOnProductivity * 0);
+        super.capitalistWorkMode();
     }
-    
-    @Override
-    public void publicEnterpriseCreation() {
-        /*
-        Private enterprises aren't coasted by the state.
-        */
-    }
-    @Override
-    public void communistWorkMode() {/*Do nothing*/}
 }

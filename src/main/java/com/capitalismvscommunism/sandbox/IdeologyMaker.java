@@ -16,7 +16,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package com.capitalismvscommunism.sandbox;
-
 /**
  *
  * @author Fabrizio De Stena Primerano
@@ -25,12 +24,13 @@ package com.capitalismvscommunism.sandbox;
  * @version 3.0
  * 
  */
-public class Communism extends Ideology {
-    public Communism(String name) {
-        super(name);
-    }
-    @Override
-    public void communistWorkMode() {
-        super.communistWorkMode();
+public class IdeologyMaker {
+    public static IdeologyMethods createIdeology(String name, String type) {
+        if(type.equalsIgnoreCase("capitalism")) {
+            return new Capitalism(name);
+        } else if (type.equalsIgnoreCase("communism")) {
+            return new Communism(name);
+        }
+        return null;
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Fabrizio
+ * Copyright (C) 2021 Fabrizio De Stena Primerano
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,11 @@ package com.capitalismvscommunism.sandbox;
 import java.util.Scanner;
 /**
  *
- * @author Fabrizio
- * @date 2021-02-22
- * @version 2.0
+ * @author Fabrizio De Stena Primerano
+ * @format dd/mm/yyyy
+ * @date 06/03/2021
+ * @version 3.0
+ * 
  */
 public class Setup {
     public static IdeologyMethods aCapitalistIdeology;
@@ -60,8 +62,8 @@ public class Setup {
         
         //initializing
         
-        aCapitalistIdeology = Ideology.createIdeology(CAPITALIST_NAME, "capitalism");
-        aCommunistIdeology =  Ideology.createIdeology(COMMUNIST_NAME, "communism");
+        aCapitalistIdeology = IdeologyMaker.createIdeology(CAPITALIST_NAME, "capitalism");
+        aCommunistIdeology =  IdeologyMaker.createIdeology(COMMUNIST_NAME, "communism");
     
         startNewDay();
         
@@ -80,6 +82,9 @@ public class Setup {
                 case 4 -> System.out.println("Gold: " + availableResources[i]);
                 case 5 -> System.out.println("Private Enterprises: " + availableResources[i]);
                 case 6 -> System.out.println("Public Enterprises: " + availableResources[i]);
+                case 7 -> System.out.println("Total of public employees: " + availableResources[i]);
+                case 8 -> System.out.println("Total of private employees: " + availableResources[i]);
+                case 9 -> System.out.println("Joy level: (%)" + availableResources[i]);
                 default -> {
                 }
             }
