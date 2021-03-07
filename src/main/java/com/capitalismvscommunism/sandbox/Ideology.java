@@ -92,7 +92,6 @@ public class Ideology implements IdeologyMethods {
                 .put("joylevel", this.joyLevel);
         
         return availableResourcesJson;
-        
     }
     
     @Override
@@ -121,8 +120,20 @@ public class Ideology implements IdeologyMethods {
             case "gold" -> this.gold += quantity;
             case "publicEnt" -> this.publicEnterprises += quantity;
             case "privateEnt" -> this.privateEnterprises += quantity;
-            case "publicEmployees" -> this.publicEmployees += quantity;
-            case "privateEmployees" -> this.privateEmployees += quantity;
+            case "publicEmployees" -> {
+                if (quantity < 0) {
+                    this.publicEmployees = 0;
+                } else {
+                    this.publicEmployees += quantity;
+                }
+            }
+            case "privateEmployees" -> {
+                if (quantity < 0) {
+                    this.privateEmployees = 0;
+                } else {
+                    this.privateEmployees += quantity;
+                }
+            }
             case "joylevel" -> {
                 float average = (int) (this.joyLevel * quantity / 100);
                 
@@ -139,10 +150,7 @@ public class Ideology implements IdeologyMethods {
         }
     }
     @Override
-    public void communistWorkMode() {/*Implemented in Communism.java*/}
-    
-    @Override
-    public void capitalistWorkMode() {/*Implemented in Capitalism.java*/}
+    public void startWork() {}
     
     @Override
     public void publicEnterpriseCreation() {
@@ -156,6 +164,4 @@ public class Ideology implements IdeologyMethods {
             index++;
         } while(index < randomPublicEntDemand);
     }
-    
-    
 }

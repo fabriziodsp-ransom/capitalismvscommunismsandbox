@@ -33,13 +33,12 @@ public class Communism extends Ideology {
     }
     
     @Override
-    public void communistWorkMode() {
+    public void startWork() {
         JSONObject resources = getAvailableResources();
         
-        // The state takes up to 20% of the resources for itself.
-        float growthBasedOnProductivity = (float) (Math.random() * getAverageResources() / 20);
-        // Communist governments can take up to 20% of the company.
-        float moneyFromTaxes = (float) (resources.getFloat("sandbox$") * (resources.getFloat("publicEnterprises") * 20 / 100));
+        float growthBasedOnProductivity = (float) (Math.random() * getAverageResources());
+        // Communist governments can take up to 20% of the company, because it's theirs.
+        float moneyFromTaxes = (float) (resources.getFloat("sandbox$") * (resources.getFloat("publicEnterprises") * Math.random() * 20 / 100));
         int moneyLeftFromPublicInversions = (int) (moneyFromTaxes - (moneyFromTaxes * resources.getInt("publicEnterprises") / 100));
         
         this.setResource("stone", growthBasedOnProductivity);

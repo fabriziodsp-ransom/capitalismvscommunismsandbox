@@ -33,17 +33,17 @@ public class Capitalism extends Ideology {
     }
     
     @Override
-    public void capitalistWorkMode() {
+    public void startWork() {
         JSONObject resources = getAvailableResources();
         
         float growthBasedOnProductivity = (float) (Math.random() * getAverageResources());
-        float moneyFromTaxes = (float) (resources.getFloat("sandbox$") * (resources.getFloat("privateEnterprises") * 2 / 100));
-        int moneyLeftFromPublicInversions = (int) (moneyFromTaxes - (moneyFromTaxes * resources.getInt("privateEnterprises") / 100));
+        float moneyFromTaxes = (float) (resources.getFloat("sandbox$") * (resources.getInt("privateEnterprises") * 2 / 100));
+        int moneyLeftFromPublicInvestments = (int) (moneyFromTaxes - (moneyFromTaxes * resources.getInt("publicEnterprises") / 100));
         
         this.setResource("stone", growthBasedOnProductivity);
         this.setResource("wood", growthBasedOnProductivity);
         this.setResource("metal", growthBasedOnProductivity);
-        this.setResource("sandbox$", moneyLeftFromPublicInversions);
+        this.setResource("sandbox$", moneyLeftFromPublicInvestments);
         this.setResource("gold", growthBasedOnProductivity);
         this.setResource("privateEnt", (int) growthBasedOnProductivity);
         this.setResource("privateEmployees", (int) growthBasedOnProductivity);

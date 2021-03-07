@@ -31,8 +31,7 @@ public interface IdeologyMethods {
     public float getAverageResources();
     public void setResource(String name, double quantity);
     public String getName();
-    public void capitalistWorkMode();
-    public void communistWorkMode();
+    public void startWork();
     public void publicEnterpriseCreation();
     public int getId();
 }

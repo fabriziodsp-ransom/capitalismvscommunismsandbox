@@ -27,8 +27,8 @@ import org.json.JSONObject;
  * 
  */
 public class Setup {
-    public static IdeologyMethods aCapitalistIdeology;
-    public static IdeologyMethods aCommunistIdeology;
+    public static Ideology aCapitalistIdeology;
+    public static Ideology aCommunistIdeology;
     public static int daysToSim = 0;
     public static int dayNo = 0;
     
@@ -82,13 +82,13 @@ public class Setup {
 
         for(int i = 0; i <= daysToSim; i++) {
 
-//Printing av. Res. for the beggining of the sim.
+            //Printing av. Res. for the beggining of the sim.
             printAvailableResources(aCapitalistIdeology);
             printAvailableResources(aCommunistIdeology);
 
-//Selecing workmode.
-            aCapitalistIdeology.capitalistWorkMode();
-            aCommunistIdeology.communistWorkMode();
+            //Selecing workmode for the day.
+            aCapitalistIdeology.startWork();
+            aCommunistIdeology.startWork();
             if(i == daysToSim) {
                 System.out.println("Simulation is over.");
                 break;
