@@ -27,9 +27,9 @@ package com.capitalismvscommunism.sandbox;
 public class IdeologyMaker {
     public static Ideology createIdeology(String name, String type) {
         if(type.equalsIgnoreCase("capitalism")) {
-            return new Capitalism(name);
+            return new Capitalism(name, type);
         } else if (type.equalsIgnoreCase("communism")) {
-            return new Communism(name);
+            return new Communism(name, type);
         }
         return null;
     }

@@ -34,4 +34,5 @@ public interface IdeologyMethods {
     public void startWork();
     public void publicEnterpriseCreation();
     public int getId();
+    public String getType();
 }

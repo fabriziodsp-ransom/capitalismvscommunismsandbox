@@ -28,6 +28,7 @@ import org.json.JSONObject;
  */
 public class Ideology implements IdeologyMethods {
     private final String NAME;
+    private final String IdeologyType;
     
     private final int id;
     public static int ideologiesCreated = 0;
@@ -46,11 +47,10 @@ public class Ideology implements IdeologyMethods {
     private final Resources[] LIST_OF_RESOURCES = Resources.values();
     private final String[][] resourcesNamesAndQuantities = new String[7][2];
 
-    Ideology(String name) {
-        
+    Ideology(String name, String ideologyType) {
         this.NAME = name;
-        id = ++ideologiesCreated; 
-        
+        this.IdeologyType = ideologyType;
+        this.id = ++ideologiesCreated; 
         int i = 0;
         for (Resources res : LIST_OF_RESOURCES) {
             this.resourcesNamesAndQuantities[i][0] = res.toString();
@@ -67,6 +67,33 @@ public class Ideology implements IdeologyMethods {
         this.publicEmployees = 500;
         this.privateEmployees = 500;
         this.joyLevel = 100;
+    }
+    
+    Ideology(String name) {
+        this.NAME = name;
+        this.IdeologyType = "unknown";
+        this.id = ++ideologiesCreated;
+        int i = 0;
+        for (Resources res : LIST_OF_RESOURCES) {
+            this.resourcesNamesAndQuantities[i][0] = res.toString();
+            this.resourcesNamesAndQuantities[i][1] = res.getResourceValue();
+            i++;
+        }
+        this.stone = Integer.parseInt(this.resourcesNamesAndQuantities[0][1]);
+        this.wood = Integer.parseInt(this.resourcesNamesAndQuantities[1][1]);
+        this.metal = Integer.parseInt(this.resourcesNamesAndQuantities[2][1]);
+        this.sandbox$ = Integer.parseInt(this.resourcesNamesAndQuantities[3][1]);
+        this.gold = Integer.parseInt(this.resourcesNamesAndQuantities[4][1]);
+        this.privateEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[5][1]);
+        this.publicEnterprises = Integer.parseInt(this.resourcesNamesAndQuantities[6][1]);
+        this.publicEmployees = 500;
+        this.privateEmployees = 500;
+        this.joyLevel = 100;
+    }
+    
+    @Override
+    public String getType() {
+        return this.IdeologyType;
     }
     @Override
     public int getId() {

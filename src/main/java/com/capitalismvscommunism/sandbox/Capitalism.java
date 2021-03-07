@@ -28,8 +28,8 @@ import org.json.JSONObject;
  */
 public class Capitalism extends Ideology {
 
-    public Capitalism (String name) {
-        super(name);
+    public Capitalism (String name, String ideologyType) {
+        super(name, ideologyType);
     }
     
     @Override
