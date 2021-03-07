@@ -26,7 +26,7 @@ import org.json.JSONObject;
  * @version refactor-more-logic
  * 
  */
-public class Ideology implements IdeologyMethods {
+public abstract class Ideology implements IdeologyMethods, WorkMethods {
     private final String NAME;
     private final String IdeologyType;
     
@@ -176,9 +176,6 @@ public class Ideology implements IdeologyMethods {
             }
         }
     }
-    @Override
-    public void startWork() {}
-    
     @Override
     public void publicEnterpriseCreation() {
         // Public enterprises are coasted by the state.

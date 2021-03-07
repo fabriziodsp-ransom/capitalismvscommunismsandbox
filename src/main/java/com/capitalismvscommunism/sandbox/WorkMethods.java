@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Fabrizio De Stena Primerano
+ * Copyright (C) 2021 usuario
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,22 +16,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package com.capitalismvscommunism.sandbox;
-import org.json.JSONObject;
+
 /**
  *
  * @author Fabrizio De Stena Primerano
  * @format dd/mm/yyyy
- * @date 06/03/2021
+ * @date 07/03/2021
  * @version refactor-more-logic
  * 
  */
-
-public interface IdeologyMethods {
-    public JSONObject getAvailableResources();
-    public float getAverageResources();
-    public void setResource(String name, double quantity);
-    public String getName();
-    public void publicEnterpriseCreation();
-    public int getId();
-    public String getType();
+public interface WorkMethods {
+    public void startWork();
 }
