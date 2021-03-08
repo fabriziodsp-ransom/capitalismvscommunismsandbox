@@ -21,7 +21,7 @@ package com.capitalismvscommunism.sandbox;
  * @author Fabrizio De Stena Primerano
  * @format dd/mm/yyyy
  * @date 06/03/2021
- * @version 3.0
+ * @version refactor-more-logic
  * 
  */
 public class IdeologyMaker {
